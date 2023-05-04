@@ -1,0 +1,36 @@
+mysql> use simats;
+Database changed
+mysql> select*from mentees;
++-----------+---------+------+------------+
+| regno     | name    | dept | fathername |
++-----------+---------+------+------------+
+| 192111058 | sailaja | CSE  | sivaraju   |
+| 192111022 | Ayush   | CSE  | john       |
+| 192111082 | uday    | CSE  | Ramesh     |
++-----------+---------+------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update mentees set dept='ECE' where regno=192111082;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mentees;
++-----------+---------+------+------------+
+| regno     | name    | dept | fathername |
++-----------+---------+------+------------+
+| 192111058 | sailaja | CSE  | sivaraju   |
+| 192111022 | Ayush   | CSE  | john       |
+| 192111082 | uday    | ECE  | Ramesh     |
++-----------+---------+------+------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from mentees where fathername='Ramesh';
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+------------+
+| regno     | name    | dept | fathername |
++-----------+---------+------+------------+
+| 192111058 | sailaja | CSE  | sivaraju   |
+| 192111022 | Ayush   | CSE  | john       |
++-----------+---------+------+------------+
