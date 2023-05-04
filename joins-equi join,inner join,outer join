@@ -1,0 +1,55 @@
+mysql> select*from mentees;
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
+| 192111022 | Ayush   | CSE  | john       |    99 | AI      |
++-----------+---------+------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> create table mdept(deptid int(5),deptname varchar(15),rollno int(10));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into mdept values(1,'CSE',192111184);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into mdept values(2,'ECE',192111055);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into mdept values(3,'CSE',192111045);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> update mdept set deptid=3 where rollno=192111045
+    ->
+    ->
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 4
+mysql> update mdept set deptid=3 where rollno=192111045;
+Query OK, 0 rows affected (0.02 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from mdept;
++--------+----------+-----------+
+| deptid | deptname | rollno    |
++--------+----------+-----------+
+|      1 | CSE      | 192111184 |
+|      2 | ECE      | 192111055 |
+|      3 | CSE      | 192111045 |
++--------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update mfdept set deptname='BME' where rollno=192111184;
+ERROR 1146 (42S02): Table 'simats.mfdept' doesn't exist
+mysql> update mdept set deptname='BME' where rollno=192111184;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mdept;
++--------+----------+-----------+
+| deptid | deptname | rollno    |
++--------+----------+-----------+
+|      1 | BME      | 192111184 |
+|      2 | ECE      | 192111055 |
+|      3 | CSE      | 192111045 |
++--------+----------+-----------+
+3 rows in set (0.00 sec)
