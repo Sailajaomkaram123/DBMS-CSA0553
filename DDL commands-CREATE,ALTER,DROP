@@ -1,0 +1,76 @@
+mysql> use simats;
+Database changed
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| simats             |
+| student            |
+| test               |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> create table faculty(name varchar(18),id int(10),dept varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc faculty;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(18) | YES  |     | NULL    |       |
+| id    | int(10)     | YES  |     | NULL    |       |
+| dept  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| name   | varchar(20) | YES  |     | NULL    |       |
+| rollno | int(10)     | NO   | PRI | 0       |       |
+| age    | int(10)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> insert into faculty values('Ram',23,'mech');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into faculty values('swathi',24,'cloud');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from faculty
+    -> ;
++--------+------+-------+
+| name   | id   | dept  |
++--------+------+-------+
+| Ram    |   23 | mech  |
+| swathi |   24 | cloud |
++--------+------+-------+
+2 rows in set (0.00 sec)
+
+mysql> drop table faculty;
+Query OK, 0 rows affected (0.00 sec)
+mysql> drop table faculty;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> alter table student add age int(10);
+ERROR 1060 (42S21): Duplicate column name 'age'
+mysql> alter table student add city varchar(20);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| name   | varchar(20) | YES  |     | NULL    |       |
+| rollno | int(10)     | NO   | PRI | 0       |       |
+| age    | int(10)     | YES  |     | NULL    |       |
+| city   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
