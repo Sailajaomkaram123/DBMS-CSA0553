@@ -1,0 +1,72 @@
+mysql> use simats;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_simats |
++------------------+
+| mentees          |
+| stdept           |
+| student          |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
+| 192111022 | Ayush   | CSE  | john       |    99 | AI      |
++-----------+---------+------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select regno,name from mentees where nameIN(select name from mentees where dept='CSE');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select name from mentees where dept='CSE')' at line 1
+mysql> select regno,name from mentees where name IN(select name form mentees where dept='CSE');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mentees where dept='CSE')' at line 1
+mysql> select regno,name from mentees where name IN(select name form mentees where dept='CSE');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mentees where dept='CSE')' at line 1
+mysql> select regno,name from mentees where name IN
+    ->
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select regno,name from mentees where name IN(select name from mentees where dept='CSE');
++-----------+---------+
+| regno     | name    |
++-----------+---------+
+| 192111058 | sailaja |
+| 192111022 | Ayush   |
++-----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> create table mentees1(id,name)
+    -> select regno,name
+    -> from mentees where dept='CSE';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name)
+select regno,name
+from mentees where dept='CSE'' at line 1
+mysql> create table mentees1(id int(10),name varchar(20),phno int(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into mentees1(id,name)
+    -> select regno,name
+    -> from mentees where dept='CSE';
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from mentees1;
++-----------+---------+------+
+| id        | name    | phno |
++-----------+---------+------+
+| 192111058 | sailaja | NULL |
+| 192111022 | Ayush   | NULL |
++-----------+---------+------+
+2 rows in set (0.00 sec)
+
+mysql> select regno,(select name from mentees1 where id=192111022)as name,dept,fathername,marks,subject from mentees where regno=192111022;
++-----------+-------+------+------------+-------+---------+
+| regno     | name  | dept | fathername | marks | subject |
++-----------+-------+------+------------+-------+---------+
+| 192111022 | Ayush | CSE  | john       |    99 | AI      |
++-----------+-------+------+------------+-------+---------+
+1 row in set (0.00 sec)
