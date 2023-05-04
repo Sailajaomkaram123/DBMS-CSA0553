@@ -1,0 +1,97 @@
+mysql> use simats;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_simats |
++------------------+
+| mentees          |
+| stdept           |
+| student          |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table mentees add subject varchar(10);
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> update mentees set subjects ='POM';
+ERROR 1054 (42S22): Unknown column 'subjects' in 'field list'
+mysql> update mentees set subjects='POM' where name='sailaja';
+ERROR 1054 (42S22): Unknown column 'subjects' in 'field list'
+mysql> update mentees set subject='POM' where name='sailaja';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update mentees set subject='AI' where name='Ayush';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mentees;
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
+| 192111022 | Ayush   | CSE  | john       |    99 | AI      |
++-----------+---------+------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> selcet *from mentees where marks BETWEEN 90 and 100;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selcet *from mentees where marks BETWEEN 90 and 100' at line 1
+mysql> select *from mentees where marks BETWEEN 90 and 100;
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
+| 192111022 | Ayush   | CSE  | john       |    99 | AI      |
++-----------+---------+------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select*from mentees where subject IN('POM');
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
++-----------+---------+------+------------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select*from mentees where marks NOT BETWEEN 95 and 99;
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
++-----------+---------+------+------------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select sum(marks) from mentees where dept='CSE';
++------------+
+| sum(marks) |
++------------+
+|        190 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(marks) as average from mentees;
++---------+
+| average |
++---------+
+| 95.0000 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select min marks as minimum from mentees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'as minimum from mentees' at line 1
+mysql> select min(marks)as minimum from mentees;
++---------+
+| minimum |
++---------+
+|      91 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks)as maximum from mentees;
++---------+
+| maximum |
++---------+
+|      99 |
++---------+
+1 row in set (0.00 sec)
