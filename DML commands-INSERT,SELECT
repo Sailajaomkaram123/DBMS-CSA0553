@@ -1,0 +1,30 @@
+mysql> use simats;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_simats |
++------------------+
+| mdept            |
+| mentees          |
+| mentees1         |
+| stdept           |
+| student          |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
+| 192111022 | Ayush   | CSE  | john       |    99 | AI      |
++-----------+---------+------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select*from mentees where name='sailaja';
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
++-----------+---------+------+------------+-------+---------+
+1 row in set (0.00 sec)
