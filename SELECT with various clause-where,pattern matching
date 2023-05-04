@@ -1,0 +1,80 @@
+mysql> use simats;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_simats |
++------------------+
+| mentees          |
+| stdept           |
+| student          |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from mentees
+    -> se
+    -> ;
++-----------+---------+------+------------+
+| regno     | name    | dept | fathername |
++-----------+---------+------+------------+
+| 192111058 | sailaja | CSE  | sivaraju   |
+| 192111022 | Ayush   | CSE  | john       |
++-----------+---------+------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select8from mentees where dept='CSE';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select8from mentees where dept='CSE'' at line 1
+mysql> select *from mentees where dept='CSE';
++-----------+---------+------+------------+
+| regno     | name    | dept | fathername |
++-----------+---------+------+------------+
+| 192111058 | sailaja | CSE  | sivaraju   |
+| 192111022 | Ayush   | CSE  | john       |
++-----------+---------+------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select*from mentees where name='Ayush';
++-----------+-------+------+------------+
+| regno     | name  | dept | fathername |
++-----------+-------+------+------------+
+| 192111022 | Ayush | CSE  | john       |
++-----------+-------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> alter table mentees add marks int(5);
+Query OK, 2 rows affected (0.04 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> update mentees set marks=91 where name='sailaja';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update mentees set marks=99 where name='Ayush';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from mentess;
+ERROR 1146 (42S02): Table 'simats.mentess' doesn't exist
+mysql> select *from mentees;
++-----------+---------+------+------------+-------+
+| regno     | name    | dept | fathername | marks |
++-----------+---------+------+------------+-------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 |
+| 192111022 | Ayush   | CSE  | john       |    99 |
++-----------+---------+------+------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select*from mentees where name like 's%';
++-----------+---------+------+------------+-------+
+| regno     | name    | dept | fathername | marks |
++-----------+---------+------+------------+-------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 |
++-----------+---------+------+------------+-------+
+1 row in set (0.00 sec)
+
+mysql> select*from mentees where name like 'A%';
++-----------+-------+------+------------+-------+
+| regno     | name  | dept | fathername | marks |
++-----------+-------+------+------------+-------+
+| 192111022 | Ayush | CSE  | john       |    99 |
++-----------+-------+------+------------+-------+
+1 row in set (0.00 sec)
