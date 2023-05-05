@@ -1,0 +1,94 @@
+mysql> use simats;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_simats |
++------------------+
+| marks_view       |
+| mdept            |
+| mentees          |
+| mentees1         |
+| per              |
+| stdept           |
+| student          |
++------------------+
+7 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
+| 192111022 | Ayush   | CSE  | john       |    99 | AI      |
++-----------+---------+------+------------+-------+---------+
+2 rows in set (0.02 sec)
+
+mysql> SELECT name,marks,case WHEN marks >95 THEN 'Excellent' WHEN marks>90 THEN 'Good' ELSE 'average' END AS performance FROM mentees;
++---------+-------+-------------+
+| name    | marks | performance |
++---------+-------+-------------+
+| sailaja |    91 | Good        |
+| Ayush   |    99 | Excellent   |
++---------+-------+-------------+
+2 rows in set (0.02 sec)
+
+mysql> select name,marks,if(marks>=95,'Excellent marks ','Good marks')from mentees;
++---------+-------+-----------------------------------------------+
+| name    | marks | if(marks>=95,'Excellent marks ','Good marks') |
++---------+-------+-----------------------------------------------+
+| sailaja |    91 | Good marks                                    |
+| Ayush   |    99 | Excellent marks                               |
++---------+-------+-----------------------------------------------+
+2 rows in set (0.00 sec)
+mysql> CREATE FUNCTION REPEAT_DEMO(INC INT)
+    -> RETURNS CHAR(40)
+    -> BEGIN
+    -> DECLARE INCOME INT;
+    -> SET INCOME=0;
+    -> REPEAT
+    -> SET INCOME=INCOME+INC;
+    -> UNTIL INCOME>4000
+    -> END REPEAT;
+    -> RETURN"INCOME>4000 DETECTED";
+    -> END;
+    -> $$
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SELECT REPEAT_DEMO(3000);$$
++----------------------+
+| REPEAT_DEMO(3000)    |
++----------------------+
+| INCOME>4000 DETECTED |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT REPEAT_DEMO(4000);$$
++----------------------+
+| REPEAT_DEMO(4000)    |
++----------------------+
+| INCOME>4000 DETECTED |
++----------------------+
+1 row in set (0.00 sec)
+mysql> CREATE FUNCTION WHILE_DEMO(VALUE CHAR(1))
+    -> RETURNS CHAR(20)
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE STR CHAR(100);
+    -> DECLARE I INT;
+    -> SET STR='';
+    -> SET I=1;
+    -> LABEL:
+    -> WHILE I<=5 DO
+    -> SET STR=CONCAT(STR,VALUE);
+    -> SET I=I+1;
+    -> END WHILE LABEL;
+    -> RETURN STR;
+    -> END;
+    -> $$
+mysql> SELECT WHILE_DEMO('A');$$
++-----------------+
+| WHILE_DEMO('A') |
++-----------------+
+| AAAAA           |
++-----------------+
+1 row in set (0.01 sec)
