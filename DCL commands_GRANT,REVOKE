@@ -1,0 +1,103 @@
+mysql> use simats;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_simats |
++------------------+
+| marks_view       |
+| mdept            |
+| mentees          |
+| mentees1         |
+| movies           |
+| per              |
+| stdept           |
+| student          |
++------------------+
+8 rows in set (0.00 sec)
+
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| name   | varchar(20) | YES  |     | NULL    |       |
+| rollno | int(10)     | NO   | PRI | 0       |       |
+| age    | int(10)     | YES  |     | NULL    |       |
+| city   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> select*from student;
+Empty set (0.00 sec)
+
+
+'
+st' at line 1
+mysql> insert into student values('sailaja',1,'19','chittoor');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('Ayush',2,'20','kerala');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('Abhi',3,'18','ongole');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('sandy',4,21,'vizag');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values('uday',5,17,'pakala');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from student;
++---------+--------+------+----------+
+| name    | rollno | age  | city     |
++---------+--------+------+----------+
+| sailaja |      1 |   19 | chittoor |
+| Ayush   |      2 |   20 | kerala   |
+| Abhi    |      3 |   18 | ongole   |
+| sandy   |      4 |   21 | vizag    |
+| uday    |      5 |   17 | pakala   |
++---------+--------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> create user sailaja;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> grant all on student to sailaja;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for sailaja;
++-------------------------------------------------------------+
+| Grants for sailaja@%                                        |
++-------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'sailaja'@'%'                         |
+| GRANT ALL PRIVILEGES ON `simats`.`student` TO 'sailaja'@'%' |
++-------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all on student from sailaja;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for sailaja;
++-------------------------------------+
+| Grants for sailaja@%                |
++-------------------------------------+
+| GRANT USAGE ON *.* TO 'sailaja'@'%' |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> grant select,update on persons to sailaja ;
+ERROR 1146 (42S02): Table 'simats.persons' doesn't exist
+mysql> create table persons(name varchar(15),num int(14));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant select,update on persons to sailaja;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for sailaja;
++-------------------------------------------------------------+
+| Grants for sailaja@%                                        |
++-------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'sailaja'@'%'                         |
+| GRANT SELECT, UPDATE ON `simats`.`persons` TO 'sailaja'@'%' |
++-------------------------------------------------------------+
+2 rows in set (0.00 sec)
