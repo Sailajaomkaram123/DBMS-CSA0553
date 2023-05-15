@@ -1,0 +1,59 @@
+mysql> use simats;
+No connection. Trying to reconnect...
+Connection id:    13
+Current database: *** NONE ***
+
+Database changed
+mysql> select*from mentees;
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
+| 192111022 | Ayush   | CSE  | john       |    99 | AI      |
++-----------+---------+------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE mentee_info()
+    -> BEGIN
+    -> select*from mentees;
+    -> END; //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CALL mentee_info();
+    -> //
++-----------+---------+------+------------+-------+---------+
+| regno     | name    | dept | fathername | marks | subject |
++-----------+---------+------+------------+-------+---------+
+| 192111058 | sailaja | CSE  | sivaraju   |    91 | POM     |
+| 192111022 | Ayush   | CSE  | john       |    99 | AI      |
++-----------+---------+------+------------+-------+---------+
+2 rows in set (0.02 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE PROCEDURE while_loop()
+    -> BEGIN
+    -> DECLARE num INT default'';
+    -> DECLARE res varchar(50) default//
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> CREATE PROCEDURE while_loop()
+    -> BEGIN
+    -> DECLARE num INT default 1;
+    -> DECLARE res varchar(50) default '';
+    -> WHILE num < 78123 DO
+    -> SET res = CONCAT(res,num,',');
+    -> SET num = num*5;
+    -> END while;
+    -> SELECT res;
+    -> END //
+ERROR 1304 (42000): PROCEDURE while_loop already exists
+mysql> call while_loop() //
++------+
+| res  |
++------+
+|      |
++------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.04 sec)
